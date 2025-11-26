@@ -144,13 +144,37 @@ def shift():
 @app.route("/v1/notifications/device", methods=["POST"])
 def device():
     print(request.json)
-    return jsonify({})
+    return jsonify({
+        "deviceInfo": {
+            "id": 123,
+            "dvToken": request.json.get("dvToken"),
+            "dvId": request.json.get("dvId"), 
+            "dvName": request.json.get("dvName"),
+            "dvOs": request.json.get("dvOs"),
+            "riderId": 456,
+            "isActive": True,
+            "createdAt": "2024-01-01T00:00:00.000Z",
+            "updatedAt": "2024-01-01T00:00:00.000Z"
+        }
+        })
 
 
 @app.route("/v1/riders/deviceInfo", methods=["POST"])
 def device_info():
     print(request.json)
-    return jsonify({})
+    return jsonify({
+        "deviceInfo": {
+            "id": 123,
+            "deviceToken": "xxx",
+            "deviceId": "xxx", 
+            "deviceOs": "android",
+            "deviceName": "string",
+            "riderId": 456,
+            "isActive": True,
+            "createdAt": "2024-01-01T00:00:00.000Z",
+            "updatedAt": "2024-01-01T00:00:00.000Z"
+        }
+    })
 
 
 if __name__ == "__main__":
