@@ -97,4 +97,52 @@ Java.perform(() => {
 
   console.log('[*] NetworkingModule.sendRequestInternal redirect hook installed');
   
+
+  console.log("[*] Démarrage des hooks de contournement de détection...");
+    
+    // Hook principal de RootedCheck
+    try {
+        var RootedCheck = Java.use("com.gantix.JailMonkey.Rooted.RootedCheck");
+        
+        RootedCheck.isJailBroken.implementation = function() {
+            console.log("[+] isJailBroken() hooké - retourne false");
+            return false;
+        };
+        
+        RootedCheck.checkWithJailMonkeyMethod.implementation = function() {
+            console.log("[+] checkWithJailMonkeyMethod() hooké - retourne false");
+            return false;
+        };
+        
+        console.log("[+] RootedCheck hooks installés");
+    } catch (e) {
+        console.log("[-] Erreur RootedCheck: " + e);
+    }
+    
+    // Hook de GreaterThan23
+    try {
+        var GreaterThan23 = Java.use("com.gantix.JailMonkey.Rooted.GreaterThan23");
+        GreaterThan23.checkRooted.implementation = function() {
+            console.log("[+] GreaterThan23.checkRooted() hooké - retourne false");
+            return false;
+        };
+        console.log("[+] GreaterThan23 hook installé");
+    } catch (e) {
+        console.log("[-] Erreur GreaterThan23: " + e);
+    }
+    
+    // Hook de RootBeerResults
+    try {
+        var RootBeerResults = Java.use("com.gantix.JailMonkey.Rooted.RootedCheck$RootBeerResults");
+        RootBeerResults.isJailBroken.implementation = function() {
+            console.log("[+] RootBeerResults.isJailBroken() hooké - retourne false");
+            return false;
+        };
+        console.log("[+] RootBeerResults hook installé");
+    } catch (e) {
+        console.log("[-] Erreur RootBeerResults: " + e);
+    }
+    
+    console.log("[*] Tous les hooks installés avec succès !");
+
 });
