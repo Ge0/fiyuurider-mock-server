@@ -177,6 +177,78 @@ def device_info():
     })
 
 
+@app.route("/v1/riders/restaurant")
+def restaurant():
+    return jsonify({
+        "data": {
+            "restaurantName": "Nom du Restaurant",
+            "restaurantId": "12345", 
+            "brandName": "Nom de la Marque",
+            "locationX": 28.9784,
+            "locationY": 41.0082
+            }
+        }
+    )
+
+
+@app.route("/v1/riders/performance/daily")
+def performance_daily():
+    return jsonify({
+        "success": True,
+        "data": {
+            "totalOrderCount": 27,
+            "totalAmount": 1250.75,
+            "todaysorder": 15,
+            "todaysworkinghour": 8,
+            
+            "yesterdaysworkinghour": 6
+        },
+        "message": "Success"
+    })
+
+@app.route("/v1/riders/performance/workingtime")
+def performance_workingtime():
+    return jsonify({
+            "recentDay": 8,
+            "previousDay": 7
+        }
+    )
+
+
+@app.route("/v1/riders/performance")
+def performance():
+    return jsonify({
+        "success": True,
+        "data": {
+
+            "previousDayReceipt": 3,        # "Dün siparis"
+            "totalReceipt": 45,             # "Toplam fis sayısı"
+            "dataMonthly": 2500.75,         # ???
+            "totalAmount": 1250.75,          # ???
+            "totalReceiptAmount": 1250.75    # ???
+        }
+        })
+
+
+@app.route("/v1/riders/shift/start", methods=["POST"])
+def start_shift():
+    base64_img = request.json.get("base64img")
+    plate = request.json.get("plate")
+    kilometer = request.json.get("kilometer")
+    location = request.json.get("location")
+    # latitude = location["latitude"]
+    # longitude = location["longitude"]
+    print(request.json)
+    return jsonify({
+        "header": {
+            "status": "SUCCESS"
+        },
+        "data": {
+            "success": True,
+            "kilometer": 1245,
+        }
+    })
+
 if __name__ == "__main__":
     # For local dev only. Use gunicorn/uwsgi in production.
     app.run(host="0.0.0.0", port=3000, debug=True)
