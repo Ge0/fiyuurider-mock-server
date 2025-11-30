@@ -131,6 +131,16 @@ def reconciliation():
 @app.route("/v1/riders/shift")
 def shift():
     print(request.headers)
+
+    return jsonify({
+        
+        "header": {
+            "detailCode": "ACTIVE_SHIFT",
+        },
+        "data": None
+        
+    })
+
     return jsonify(
         {
             "header": {
@@ -247,6 +257,37 @@ def start_shift():
             "success": True,
             "kilometer": 1245,
         }
+    })
+
+@app.route("/v1/routes/details")
+def route_details():
+    return jsonify({
+        "success": True,
+            "data": {
+                "routeList": [
+                    {"routeId": "ROUTE_123"}
+                ]
+            }
+        }
+    )
+
+@app.route("/v1/riders/profile/get")
+def profile_get():
+    return jsonify({
+        "success": True,
+        "data": {
+            "bloodGroup": "A+",           # Groupe sanguin
+            "headGuardSize": "L",         # Taille de casque
+            "jacketSize": "M",            # Taille de veste
+            "pantsSize": "32",            # Taille de pantalon
+            "phoneNumber": "+905555123456",  # Numéro de téléphone
+            "email": "email@example.com",   # Email
+            "hubArea": "İstanbul Avrupa",  # Zone/région
+            "hubManager": "Ahmet Yılmaz", # Responsable de zone
+            "posDevice": "POS123456"     # Numéro de série du POS
+
+        },
+        "message": "Success"
     })
 
 if __name__ == "__main__":
